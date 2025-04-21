@@ -27,6 +27,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores import Pinecone
+from langchain_community.vectorstores import Chroma
 
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -135,7 +136,7 @@ vectordb = vectordb.similarity_search(query, k=3)
 
 
 
-from langchain_community.vectorstores import Chroma
+
 langchainChroma = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 retriver = langchainChroma.as_retriever(search_kwargs={"k":2})
 qa = RetrievalQA.from_chain_type(llm = llm, chain_type='stuff', retriever = retriver)
